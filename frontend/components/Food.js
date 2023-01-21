@@ -8,7 +8,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 
 const contractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
-const URL = "https://chainfood.vercel.app/";
+const URL = "http://localhost:3000/";
 
 const Food = ({
   title,
