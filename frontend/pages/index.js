@@ -6,7 +6,7 @@ import AppContext from "../components/AppContext";
 import Food from "../components/Food";
 import CreateForm from "../components/CreateForm";
 import { ethers } from "ethers";
-import abiJSon from "../../backend/artifacts/contracts/ChainFood.sol/ChainFood.json";
+import abiJSon from "../abi/ChainFood.json";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 

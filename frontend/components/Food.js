@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import abiJSon from "../../backend/artifacts/contracts/ChainFood.sol/ChainFood.json";
+import abiJSon from "../abi/ChainFood.json";
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { useRouter } from "next/router";
