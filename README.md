@@ -63,8 +63,6 @@ yarn
 yarn dev
 ```
 
-<img src="/utils/webphotos/screenshot-wf.png" width="800px" height="auto"/>
-
 <img src="/utils/webphotos/screenshot-wof.png" width="800px" height="auto"/>
 
 - to deploy the smart contracts to the local node first create a .env.local file and put neccessary inputs.
@@ -90,6 +88,8 @@ yarn hardhat run scripts/deploy.js --network testnet
 - Copy and write the deployed contract address to .env.local file.
 
 - Import a few of the test accounts into Metamask for testing purposes.
+
+<img src="/utils/webphotos/screenshot-wf.png" width="800px" height="auto"/>
 
 ---
 
