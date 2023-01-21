@@ -1,9 +1,7 @@
 import "../styles/globals.css";
 import Layout from "../components/Layout";
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import AppContext from "../components/AppContext";
-import ReactDOM from "react-dom";
-import { MoralisProvider } from "react-moralis";
 
 export default function App({ Component, pageProps }) {
   // const [accountAddress, setAccountAddress] = useState("");
