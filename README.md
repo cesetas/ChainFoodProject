@@ -6,7 +6,7 @@ To design a dApp serving for food orders with help of the transactions taking pl
 This project is for users who would like to post their food ads. andf for costumers who would like to order from these ads as well. There is a reward mechanism which supports the survival of the system. Users can get 10 CF token created for this project. Costumers who order from user's ad can get 0.01 CF token as well.  Costumers can like/dislike the add they order from in 10 days to be able to encourage users posting on the system to do their job better.
 
 - [Demo video](https://www.loom.com/share/cde9f5c47b424c9a83551a45b9d71a53)
-- [Testnet site](https://)
+- [Testnet site](https://chainfood.vercel.app/)
 
 ---
 
