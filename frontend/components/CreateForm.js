@@ -74,7 +74,7 @@ const CreateForm = ({
       <div className="basis-1/2 mt-2 md:mt-0">
         {isCreated ? (
           <div className="text-xl md:text-2xl  xl:text-3xl flex justify-center content-center items-center bg-cyan-100 rounded-xl h-full font-bold text-cyan-900 border border-blue-200 p-3 ">
-            <p>People is waiting for your meal offer</p>
+            <p>People are waiting for your meal offer</p>
           </div>
         ) : (
           <div className="basis-1/2 text-sm md:text-lg  xl:text-xl  bg-cyan-100 rounded-xl h-full font-bold text-cyan-900 border border-blue-200 p-3 ">
