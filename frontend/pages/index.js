@@ -19,6 +19,7 @@ const initialvalues = {
 };
 const initialAmount = "";
 const contractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
+const URL = "https://chainfood.vercel.app/";
 
 export default function Home({ data }) {
   const [apiData, setApiData] = useState([]);
@@ -90,7 +91,7 @@ export default function Home({ data }) {
       dislikes: 0,
     };
     console.log(JSON.stringify(newvalues));
-    const res = await fetch("http://localhost:3000/api/posts", {
+    const res = await fetch(`${URL}api/posts`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -238,7 +239,7 @@ export default function Home({ data }) {
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch("http://localhost:3000/api/posts");
+  const res = await fetch(`${URL}api/posts`);
   const data = await res.json();
 
   // Pass data to the page via props

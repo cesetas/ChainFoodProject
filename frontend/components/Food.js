@@ -8,6 +8,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 
 const contractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
+const URL = "https://chainfood.vercel.app/";
 
 const Food = ({
   title,
@@ -78,7 +79,7 @@ const Food = ({
     });
     if (tx) {
       try {
-        const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+        const res = await fetch(`${URL}api/posts/${id}`, {
           method: "Delete",
         });
         if (res.status < 300) {
@@ -235,7 +236,7 @@ const Food = ({
 
   const postFoodLikes = async () => {
     console.log("postlikes mongoId" + mongoId);
-    const res = await fetch(`http://localhost:3000/api/posts/${mongoId}`, {
+    const res = await fetch(`${URL}api/posts/${mongoId}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -252,7 +253,7 @@ const Food = ({
 
   const postFoodDislikes = async () => {
     console.log("postdislikes mongoId" + mongoId);
-    const res = await fetch(`http://localhost:3000/api/posts/${mongoId}`, {
+    const res = await fetch(`${URL}api/posts/${mongoId}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
