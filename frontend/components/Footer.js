@@ -17,16 +17,16 @@ const Footer = () => {
         </span>
       </div>
       <div className="flex justify-around">
-        <a href="https://www.google.com " target="_blank">
+        <a href="https://www.linkedin.com/in/cesetas/" target="_blank">
           <LinkedInIcon className="m-2" />
         </a>
-        <a href="https://www.google.com " target="_blank">
+        <a href="https://github.com/cesetas" target="_blank">
           <GitHubIcon className="m-2" />
         </a>
-        <a href="https://www.google.com " target="_blank">
+        <a href="https://twitter.com/" target="_blank">
           <TwitterIcon className="m-2" />
         </a>
-        <a href="https://www.google.com " target="_blank">
+        <a href="https://www.facebook.com/" target="_blank">
           <FacebookIcon className="m-2" />
         </a>
       </div>
