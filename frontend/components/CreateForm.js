@@ -78,7 +78,7 @@ const CreateForm = ({
           </div>
         ) : (
           <div className="basis-1/2 text-sm md:text-lg  xl:text-xl  bg-cyan-100 rounded-xl h-full font-bold text-cyan-900 border border-blue-200 p-3 ">
-            <h2 className="">Creater:{owner}</h2>
+            <h2>Creater:{owner}</h2>
             <h2>Food's given id no : {foodId}</h2>
             <h2>Food price :{price / 10 ** 18} ETH</h2>
             <h2>Food token :{token / 10 ** 18} CF</h2>
