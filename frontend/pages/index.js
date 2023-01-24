@@ -18,7 +18,8 @@ const initialvalues = {
   dislikes: 0,
 };
 const initialAmount = "";
-const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+// const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+const contractAddress = "0x2d1309Fde5D8c1ab2c8036c26FadfE9d933Ce9E4";
 
 const URL = "https://chainfood.vercel.app/";
 // const URL = "http://localhost:3000/";
