@@ -12,6 +12,7 @@ const CreateForm = ({
   token,
   foodId,
   isWaiting,
+  setIsWaiting,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -21,10 +22,10 @@ const CreateForm = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsSubmitting(true);
+    setIsWaiting(true);
     await createFood();
     setValues(initialvalues);
-    setIsSubmitting(false);
+    setIsWaiting(false);
   };
 
   return (
@@ -56,7 +57,7 @@ const CreateForm = ({
             value={values.photo}
           />
 
-          {isSubmitting ? (
+          {isWaiting ? (
             <button
               type="submit"
               className="w-full p-2 bg-gradient-to-tr from-black to-blue-900 text-white hover:bg-gradient-to-tl from-black to-blue-700 hover:-translate-y-0.5 rounded-lg mt-2"

@@ -232,6 +232,7 @@ export default function Home({ data }) {
             foodId={foodId}
             token={token}
             isWaiting={isWaiting}
+            setIsWaiting={setIsWaiting}
           />
         </div>
       </div>
