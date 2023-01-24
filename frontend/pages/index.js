@@ -128,13 +128,15 @@ export default function Home({ data }) {
         setFoodId(id.toString());
         setIsCreated(false);
       });
-      await tx.wait(2);
+      await tx.wait(5);
+      setIsWaiting(false);
     } catch (error) {
       setErrorMessage(error.message.substring(108, 249));
       setIsError(true);
       setTimeout(() => {
         setIsError(false);
       }, [10000]);
+      setIsWaiting(false);
     }
     // if (tx) {
     //   postFood();

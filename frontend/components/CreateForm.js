@@ -25,7 +25,6 @@ const CreateForm = ({
     setIsWaiting(true);
     await createFood();
     setValues(initialvalues);
-    setIsWaiting(false);
   };
 
   return (
