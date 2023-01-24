@@ -59,7 +59,7 @@ This project is for the sellers who would like to post their food ads. and for t
 npm install
 ```
 
-- to start a local node;
+- to start app
 
 ```
 npm run dev
@@ -67,7 +67,7 @@ npm run dev
 
 <img src="/utils/webphotos/screenshot-wof.png" width="800px" height="auto"/>
 
-- to deploy the smart contracts to the local node or any testnet first create a .env file in the backend directory and put neccessary values inside.
+- to deploy the smart contract to any testnet first create a .env file in the backend directory and put neccessary values inside.
 
 example;
 
@@ -91,10 +91,17 @@ CONNECTION_URL =
 NEXT_PUBLIC_DOMAIN_LOC = https://zknews-testnet.vercel.app/
 ```
 
-- To deploy the contract on testnet;
+- to deploy the smart contracts to the local node
+- first start the hardhat local node;
 
 ```
-yarn hardhat run scripts/deploy.js --network testnet
+npx hardhat node
+```
+
+- Then deploy the contract on localhost;
+
+```
+yarn hardhat run --network localhost scripts/deploy.js
 ```
 
 - Copy and write the deployed contract address to .env file.

@@ -7,8 +7,11 @@ import { useRouter } from "next/router";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 
-const contractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
+const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+
+//change URL according its use
 const URL = "https://chainfood.vercel.app/";
+// const URL = "http://localhost:3000/";
 
 const Food = ({
   title,
@@ -24,6 +27,8 @@ const Food = ({
   setIsDeleted,
   setErrorMessage,
   setIsError,
+  setIsWaiting,
+  isWaiting,
 }) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
@@ -45,13 +50,31 @@ const Food = ({
 
   const handleDelete = (event) => {
     event.preventDefault();
+    setIsWaiting(true);
     console.log(event.target.id, event.target.name);
     deletePost(event.target.id, event.target.name);
   };
 
   const handleOrder = (event) => {
     event.preventDefault();
+    setIsWaiting(true);
     orderFood(event.target.id);
+  };
+
+  const handleLike = (event) => {
+    event.preventDefault();
+    setIsWaiting(true);
+    setMongoId(event.target.name);
+    likeFood(event.target.id, event.target.name);
+    // setIsWaiting(false);
+  };
+
+  const handleDislike = (event) => {
+    event.preventDefault();
+    setIsWaiting(true);
+    setMongoId(event.target.name);
+    dislikeFood(event.target.id, event.target.name);
+    // setIsWaiting(!isWaiting);
   };
 
   const deletePost = async (postid, id) => {
@@ -64,7 +87,29 @@ const Food = ({
     let tx;
     try {
       tx = await chainFoodContract.deleteFood(postid);
-      await tx.wait(1);
+      if (tx) {
+        try {
+          const res = await fetch(`${URL}api/posts/${id}`, {
+            method: "Delete",
+          });
+          if (res.status < 300) {
+            refreshData();
+            setIsDeleted(true);
+            setTimeout(() => {
+              setIsDeleted(false);
+            }, [10000]);
+          }
+        } catch (error) {
+          console.log(error);
+          setErrorMessage(error.message.substring(150, 249));
+          setIsError(true);
+          setTimeout(() => {
+            setIsError(false);
+          }, [10000]);
+        }
+      }
+      await tx.wait(2);
+      setIsWaiting(false);
     } catch (error) {
       console.log(error.message.substring(150, 249));
       setErrorMessage(error.message.substring(150, 249));
@@ -72,9 +117,10 @@ const Food = ({
       setTimeout(() => {
         setIsError(false);
       }, [10000]);
+      setIsWaiting(false);
     }
 
-    chainFoodContract.on("Liked", (postid) => {
+    chainFoodContract.on("Deleted", (postid) => {
       console.log("Deleted id :" + postid);
     });
     if (tx) {
@@ -115,12 +161,6 @@ const Food = ({
       };
 
       const tx = await chainFoodContract.orderFood(parseInt(id), options);
-      await tx.wait(1);
-      // const tokenAmount = await chainFoodContract.balanceOf(
-      //   await signer.getAdress()
-      // );
-      // const owneraddress = await provider.getAdress();
-      // console.log("token :" + owneraddress);
 
       chainFoodContract.on("Ordered", async (id, buyer, orderAmount, token) => {
         console.log(id, buyer, orderAmount);
@@ -128,12 +168,15 @@ const Food = ({
         const tokenAmount = await chainFoodContract.balanceOf(buyer);
         console.log(tokenAmount);
       });
+      await tx.wait(2);
+      setIsWaiting(false);
     } catch (error) {
       setErrorMessage(error.message.substring(150, 249));
       setIsError(true);
       setTimeout(() => {
         setIsError(false);
       }, [10000]);
+      setIsWaiting(false);
     }
   };
 
@@ -163,6 +206,7 @@ const Food = ({
   const likeFood = async (id, mongoid) => {
     // setMongoId(mongoid);
     setIsLikeStateChanged(false);
+
     await connect();
     try {
       const chainFoodContract = new ethers.Contract(
@@ -175,24 +219,27 @@ const Food = ({
         gasLimit: 500000,
       };
       const tx = await chainFoodContract.like(id, options);
-      await tx.wait(1);
 
       chainFoodContract.on("Liked", (id, likeAmount) => {
         console.log("id :" + id);
         setLikes(likeAmount);
         setIsLikeStateChanged(true);
       });
+      await tx.wait(2);
+      setIsWaiting(false);
     } catch (error) {
       setErrorMessage(error.message.substring(105, 249));
       setIsError(true);
       setTimeout(() => {
         setIsError(false);
       }, [10000]);
+      setIsWaiting(false);
     }
   };
 
   const dislikeFood = async (id, mongoid) => {
     // setMongoId(mongoid);
+
     setIsDislikeStateChanged(false);
     await connect();
     try {
@@ -206,32 +253,22 @@ const Food = ({
         gasLimit: 500000,
       };
       const tx = await chainFoodContract.dislike(id, options);
-      await tx.wait(1);
 
       chainFoodContract.on("Disliked", (id, dislikeAmount) => {
         console.log("id :" + id);
         setDislikes(dislikeAmount);
         setIsDislikeStateChanged(true);
       });
+      await tx.wait(2);
+      setIsWaiting(false);
     } catch (error) {
       setErrorMessage(error.message.substring(105, 249));
       setIsError(true);
       setTimeout(() => {
         setIsError(false);
       }, [10000]);
+      setIsWaiting(false);
     }
-  };
-
-  const handleLike = (event) => {
-    event.preventDefault();
-    setMongoId(event.target.name);
-    likeFood(event.target.id, event.target.name);
-  };
-
-  const handleDislike = (event) => {
-    event.preventDefault();
-    setMongoId(event.target.name);
-    dislikeFood(event.target.id, event.target.name);
   };
 
   const postFoodLikes = async () => {
@@ -334,6 +371,7 @@ const Food = ({
                 {frontLikes}
               </span>
             </button>
+
             <button
               id={id}
               name={pageId}
@@ -348,6 +386,7 @@ const Food = ({
                 {frontDislikes}
               </span>
             </button>
+
             <button
               id={id}
               name={pageId}

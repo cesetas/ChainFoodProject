@@ -18,8 +18,10 @@ const initialvalues = {
   dislikes: 0,
 };
 const initialAmount = "";
-const contractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
+const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+
 const URL = "https://chainfood.vercel.app/";
+// const URL = "http://localhost:3000/";
 
 export default function Home({ data }) {
   const [apiData, setApiData] = useState([]);
@@ -40,6 +42,7 @@ export default function Home({ data }) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState([]);
   const [isError, setIsError] = useState(false);
+  const [isWaiting, setIsWaiting] = useState(false);
 
   const refreshData = () => {
     router.replace(router.asPath);
@@ -47,13 +50,8 @@ export default function Home({ data }) {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsRefreshing(false);
-    }, [10000]);
-  }, [data]);
-
-  useEffect(() => {
     setApiData(data);
+    setIsRefreshing(false);
   }, [data]);
 
   const connect = async () => {
@@ -119,7 +117,7 @@ export default function Home({ data }) {
         signer
       );
       tx = await chainFoodContract.create(values.title, values.price);
-      await tx.wait(1);
+
       setTitle(values.title);
       setPhoto(values.photo);
       chainFoodContract.on("FoodCreated", async (id, owner, price, token) => {
@@ -129,6 +127,7 @@ export default function Home({ data }) {
         setFoodId(id.toString());
         setIsCreated(false);
       });
+      await tx.wait(2);
     } catch (error) {
       setErrorMessage(error.message.substring(108, 249));
       setIsError(true);
@@ -199,6 +198,8 @@ export default function Home({ data }) {
                   setIsDeleted={setIsDeleted}
                   setErrorMessage={setErrorMessage}
                   setIsError={setIsError}
+                  setIsWaiting={setIsWaiting}
+                  isWaiting={isWaiting}
                 />
               </div>
             ))}
@@ -230,6 +231,7 @@ export default function Home({ data }) {
             owner={owner}
             foodId={foodId}
             token={token}
+            isWaiting={isWaiting}
           />
         </div>
       </div>
