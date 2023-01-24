@@ -110,14 +110,14 @@ export default function Home({ data }) {
 
   const createFood = async () => {
     await connect();
-    let tx;
+
     try {
       const chainFoodContract = new ethers.Contract(
         contractAddress,
         abiJSon.abi,
         signer
       );
-      tx = await chainFoodContract.create(values.title, values.price);
+      const tx = await chainFoodContract.create(values.title, values.price);
 
       setTitle(values.title);
       setPhoto(values.photo);
@@ -138,9 +138,6 @@ export default function Home({ data }) {
       }, [10000]);
       setIsWaiting(false);
     }
-    // if (tx) {
-    //   postFood();
-    // }
   };
 
   useEffect(() => {
