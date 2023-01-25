@@ -117,7 +117,9 @@ export default function Home({ data }) {
         abiJSon.abi,
         signer
       );
+      console.log(contractAddress, signer, abiJSon.abi);
       const tx = await chainFoodContract.create(values.title, values.price);
+      console.log("tx :" + tx);
 
       setTitle(values.title);
       setPhoto(values.photo);
@@ -128,7 +130,8 @@ export default function Home({ data }) {
         setFoodId(id.toString());
         setIsCreated(false);
       });
-      await tx.wait(5);
+      await tx.wait(2);
+      // setIsCreated(false);
       setIsWaiting(false);
     } catch (error) {
       setErrorMessage(error.message.substring(108, 249));
