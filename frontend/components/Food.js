@@ -8,7 +8,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 
 // const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
-const contractAddress = "0x2d1309Fde5D8c1ab2c8036c26FadfE9d933Ce9E4";
+const contractAddress = "0xbcD5ce1cCF6B1139bE5dbCfDaB15908Cd57B5D32";
 
 //change URL according its use
 const URL = "https://chainfood.vercel.app/";
@@ -67,7 +67,6 @@ const Food = ({
     setIsWaiting(true);
     setMongoId(event.target.name);
     likeFood(event.target.id, event.target.name);
-    // setIsWaiting(false);
   };
 
   const handleDislike = (event) => {
@@ -75,7 +74,6 @@ const Food = ({
     setIsWaiting(true);
     setMongoId(event.target.name);
     dislikeFood(event.target.id, event.target.name);
-    // setIsWaiting(!isWaiting);
   };
 
   const deletePost = async (postid, id) => {
@@ -239,8 +237,6 @@ const Food = ({
   };
 
   const dislikeFood = async (id, mongoid) => {
-    // setMongoId(mongoid);
-
     setIsDislikeStateChanged(false);
     await connect();
     try {

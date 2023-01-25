@@ -19,7 +19,7 @@ const initialvalues = {
 };
 const initialAmount = "";
 // const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
-const contractAddress = "0x2d1309Fde5D8c1ab2c8036c26FadfE9d933Ce9E4";
+const contractAddress = "0xbcD5ce1cCF6B1139bE5dbCfDaB15908Cd57B5D32";
 
 const URL = "https://chainfood.vercel.app/";
 // const URL = "http://localhost:3000/";
@@ -117,9 +117,15 @@ export default function Home({ data }) {
         abiJSon.abi,
         signer
       );
-      console.log(contractAddress, signer, abiJSon.abi);
-      const tx = await chainFoodContract.create(values.title, values.price);
-      console.log("tx :" + tx);
+      const options = {
+        gasLimit: 500000,
+      };
+
+      const tx = await chainFoodContract.create(
+        values.title,
+        values.price,
+        options
+      );
 
       setTitle(values.title);
       setPhoto(values.photo);
@@ -131,7 +137,6 @@ export default function Home({ data }) {
         setIsCreated(false);
       });
       await tx.wait(2);
-      // setIsCreated(false);
       setIsWaiting(false);
     } catch (error) {
       setErrorMessage(error.message.substring(108, 249));
