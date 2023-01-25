@@ -89,7 +89,7 @@ export default function Home({ data }) {
       likes: 0,
       dislikes: 0,
     };
-    console.log(JSON.stringify(newvalues));
+
     const res = await fetch(`${URL}api/posts`, {
       method: "POST",
       headers: {

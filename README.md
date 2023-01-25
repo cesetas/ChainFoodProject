@@ -16,6 +16,7 @@ This project is for the sellers who would like to post their food ads. and for t
 
 - This is a full-stack project with two backend structure. The frontend built with Next.js and the ChainFood contract was deployed on Hardhat node. Recorded values are kept with Nextjs api in MongoDB database.
 - TaiwindcCSS, Material UI and React-icons were used in frontend development.
+  -Project is live at Polygon Mumbai testnet at the moment.
 
 # Main Functions
 
@@ -85,10 +86,10 @@ GOERLI_PRIVATE_KEY =
 CONNECTION_URL =
 ```
 
-- Load your project in any UI provider. This project was loaded to vercel.com. To setup UI domain name; write your UI domain name preference into the .env.local file as shown;
+- Load your project in any UI provider. This project was loaded to vercel.com. To setup UI domain name; write your UI domain name preference into the const value in "Food.js" file in components section and "index.js" file in pages section as shown;
 
 ```
-NEXT_PUBLIC_DOMAIN_LOC = https://zknews-testnet.vercel.app/
+const URL = https://chainfood.vercel.app/
 ```
 
 - to deploy the smart contracts to the local node
@@ -104,7 +105,11 @@ npx hardhat node
 yarn hardhat run --network localhost scripts/deploy.js
 ```
 
-- Copy and write the deployed contract address to .env file.
+- Copy and write the deployed contract address to the const value in "Food.js" file in components section and "index.js" file in pages section as shown;
+
+```
+const contractAddress = "0xbcD5ce1cCF6B1139bE5dbCfDaB15908Cd57B5D32";
+```
 
 - Import a few of the test accounts into Metamask for testing purposes.
 

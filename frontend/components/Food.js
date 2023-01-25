@@ -21,7 +21,6 @@ const Food = ({
   pageId,
   id,
   token,
-  setSendAmount,
   frontLikes,
   frontDislikes,
   isDeleted,
@@ -49,29 +48,29 @@ const Food = ({
     connect();
   }, []);
 
-  const handleDelete = (event) => {
+  const handleDelete = async (event) => {
     event.preventDefault();
-    setIsWaiting(true);
+    await setIsWaiting(true);
     console.log(event.target.id, event.target.name);
-    deletePost(event.target.id, event.target.name);
+    await deletePost(event.target.id, event.target.name);
   };
 
-  const handleOrder = (event) => {
+  const handleOrder = async (event) => {
     event.preventDefault();
-    setIsWaiting(true);
+    await setIsWaiting(true);
     orderFood(event.target.id);
   };
 
-  const handleLike = (event) => {
+  const handleLike = async (event) => {
     event.preventDefault();
-    setIsWaiting(true);
+    await setIsWaiting(true);
     setMongoId(event.target.name);
     likeFood(event.target.id, event.target.name);
   };
 
-  const handleDislike = (event) => {
+  const handleDislike = async (event) => {
     event.preventDefault();
-    setIsWaiting(true);
+    await setIsWaiting(true);
     setMongoId(event.target.name);
     dislikeFood(event.target.id, event.target.name);
   };
@@ -98,6 +97,7 @@ const Food = ({
               setIsDeleted(false);
             }, [10000]);
           }
+          setIsWaiting(false);
         } catch (error) {
           console.log(error);
           setErrorMessage(error.message.substring(150, 249));
@@ -105,6 +105,7 @@ const Food = ({
           setTimeout(() => {
             setIsError(false);
           }, [10000]);
+          setIsWaiting(false);
         }
       }
       await tx.wait(2);
